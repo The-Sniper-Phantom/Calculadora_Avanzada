@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1050030536172",
+    "project_id": "proyecto-imc-291cf",
+    "storage_bucket": "proyecto-imc-291cf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1050030536172:android:1d8492c6327e1fe5b2bcc9",
+        "android_client_info": {
+          "package_name": "com.example.calculadora_imc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1050030536172-pgfkest6lklkt8qbrk3n7vm31rntgbf9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.calculadora_imc",
+            "certificate_hash": "90c2a47007089dfc64323ab90e72aa3a61332b20"
+          }
+        },
+        {
+          "client_id": "1050030536172-82rkdgigm7g8mr9au4r2okhqnib6f753.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxvskcNQGxk195fM1TzrZp-O0T_mJ71sk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1050030536172-82rkdgigm7g8mr9au4r2okhqnib6f753.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

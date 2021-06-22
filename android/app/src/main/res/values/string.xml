@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Calculadora IMC</string> 
+  <string name="facebook_app_id">2174935679308379</string> 
+  <string name="fb_login_protocol_scheme">fb2174935679308379</string>
+
+</resources>
