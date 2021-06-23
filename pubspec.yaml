@@ -31,6 +31,8 @@ flutter:
 
   assets:
     - assets/pages/login/
+    - assets/pages/loading/
+    - assets/pages/onboarding/
 
   fonts:
     - family: Oranienbaum
