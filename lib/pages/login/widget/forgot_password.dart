@@ -60,15 +60,24 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
               Text(
                 "Restablecer Contraseña",
                 style: TextStyle(
-                  color: AppColors.primary,
                   fontSize: 25,
-                  fontFamily: 'Wallpoet',
+                  fontFamily: "Oranienbaum",
                   fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
               ),
               SizedBox(height: responsive.ip(2)),
+              Text(
+                "Introdusca el correo con el cual se registro para restablecer su contraseña",
+                style: TextStyle(
+                    fontSize: 16, fontFamily: 'Benne', color: Colors.white),
+              ),
+              SizedBox(height: responsive.ip(2)),
               _sent
-                  ? Text("Correo Enviado Revise Su Bandeja De Entrada")
+                  ? Text(
+                      "Recibirás un enlace para cambiar tu contraseña al correo registrado",
+                      style: TextStyle(color: Colors.white),
+                    )
                   : InputTextLogin(
                       key: _emailkey,
                       iconPath: 'assets/pages/login/email.svg',
@@ -82,7 +91,10 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
                 children: <Widget>[
                   FlatButton(
                     onPressed: widget.onGoToLogin,
-                    child: Text("<- Volver"),
+                    child: Text(
+                      "<- Volver",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                   if (!_sent) ...[
                     SizedBox(width: 10),

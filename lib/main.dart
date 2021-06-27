@@ -5,15 +5,16 @@ import 'package:calculadora_imc/pages/splash/splash_page.dart';
 import 'package:calculadora_imc/widget/animated_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../utils/responsive.dart';
 
 const blue = Color(0xFF4781ff);
 const kTitleStyle = TextStyle(
     fontSize: 30,
-    color: Color(0xFF01002f),
-    fontFamily: "Benne",
+    color: Colors.white,
+    fontFamily: "Oranienbaum",
     fontWeight: FontWeight.bold);
-const kSubtitleStyle = TextStyle(
-    fontSize: 18, color: Color(0xFF88869f), fontFamily: "Oranienbaum");
+const kSubtitleStyle =
+    TextStyle(fontSize: 18, color: Color(0xFF88869f), fontFamily: "Benne");
 
 void main() {
   runApp(MyApp());
@@ -48,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(seconds: 4), () {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
     });
@@ -56,13 +57,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Responsive responsive = Responsive.of(context);
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/pages/loading/logo.jpg', height: 150),
+            Image.asset(
+              'assets/pages/loading/logo.jpg',
+              width: responsive.wp(50),
+            ),
             SizedBox(height: 50),
             CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
@@ -84,13 +89,14 @@ class _MainPageState extends State<MainPage> {
 
   void nextPage() {
     pageController.nextPage(
-        duration: const Duration(milliseconds: 200), curve: Curves.ease);
+        duration: const Duration(milliseconds: 600), curve: Curves.ease);
   }
 
   @override
   Widget build(BuildContext context) {
+    final Responsive responsive = Responsive.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       body: SafeArea(
           child: Container(
         child: PageView(
@@ -98,27 +104,49 @@ class _MainPageState extends State<MainPage> {
           physics: NeverScrollableScrollPhysics(),
           children: [
             Slide(
-                prod: Image.asset('assets/pages/onboarding/page_1.jpg'),
-                title: "QUE ES EL IMC?",
+                prod: Image.asset('assets/pages/onboarding/page_1.png',
+                    width: responsive.wp(80),
+                    height: responsive.hp(95),
+                    color: Colors.white),
+                title: "QUE ES IMC?",
                 subtitle:
-                    "Una medida de la obesidad se determina mediante el índice de masa corporal (IMC).",
+                    "Una medida de la obesidad se determina mediante el índice de masa corporal (IMC).que se calcula dividiendo los kilogramos de peso por el cuadrado de la estatura en metros (IMC = peso [kg]/ estatura [m2]).",
                 onNext: nextPage),
             Slide(
-                prod: Image.asset('assets/pages/onboarding/page_1.jpg'),
-                title: "QUE ES EL IMC?",
+                prod: Image.asset(
+                  'assets/pages/onboarding/page_2.png',
+                  color: Colors.white,
+                  width: responsive.wp(50),
+                  height: responsive.hp(65),
+                ),
+                title: "RUTINAS DE EJERCICIO.",
                 subtitle:
-                    "Una medida de la obesidad se determina mediante el índice de masa corporal (IMC).",
+                    "Una rutina de definición muscular es un programa de entrenamiento donde el principal objetivo es reducir nuestro porcentaje de grasa corporal pero manteniendo el músculo que hemos ganado durante nuestras rutinas de fuerza y volumen.",
                 onNext: nextPage),
             Slide(
-                prod: Image.asset('assets/pages/onboarding/page_1.jpg'),
-                title: "QUE ES EL IMC?",
+                prod: Image.asset(
+                  'assets/pages/onboarding/page_3.png',
+                  width: responsive.wp(70),
+                  height: responsive.hp(85),
+                  color: Colors.white,
+                ),
+                title: "NUTRICION",
                 subtitle:
-                    "Una medida de la obesidad se determina mediante el índice de masa corporal (IMC).",
+                    "La cantidad de nutriente que se recomienda diariamente para un grupo de personas dependiendo de su edad y sexo. Las recomendaciones se calculan en base a los requerimientos nutricionales de los individuos.",
                 onNext: nextPage),
-            /*   Container(
-             MainPage(),
-            
-            ), */
+            Container(
+              child: Center(
+                child: RaisedButton(
+                  child: Text('Open route'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SplashPage()),
+                    );
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       )),
@@ -141,6 +169,8 @@ class Slide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Responsive responsive = Responsive.of(context);
+
     return Container(
         child: Column(
       children: [
@@ -155,10 +185,10 @@ class Slide extends StatelessWidget {
                 title,
                 style: kTitleStyle,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: responsive.ip(2)),
               Text(subtitle,
                   style: kSubtitleStyle, textAlign: TextAlign.center),
-              SizedBox(height: 35),
+              SizedBox(height: responsive.ip(3)),
               ProgressButton(onNext: onNext),
             ],
           ),

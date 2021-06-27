@@ -81,7 +81,7 @@ class _HomePageState extends State<AccountScreen> {
                     SizedBox(height: 20),
                     RoundedButton(
                       backgroundColor: Colors.black,
-                      label: "Log Out",
+                      label: "Sign Out",
                       onPressed: () {
                         Auth.instance.logOut(context);
                       },

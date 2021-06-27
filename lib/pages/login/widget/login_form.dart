@@ -1,13 +1,13 @@
 import 'package:calculadora_imc/libs/auth.dart';
+import 'package:calculadora_imc/utils/extras.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:calculadora_imc/pages/home/home_page.dart';
 import 'package:calculadora_imc/pages/login/widget/input_text_login.dart';
 import 'package:calculadora_imc/utils/responsive.dart';
-import 'package:calculadora_imc/utils/extras.dart';
 import 'package:calculadora_imc/widget/circle_button.dart';
 import 'package:calculadora_imc/widget/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginForm extends StatefulWidget {
   final Alignment alignment;
@@ -28,11 +28,11 @@ class _LoginFormState extends State<LoginForm> {
   final GlobalKey<InputTextLoginState> _emailkey = GlobalKey();
   final GlobalKey<InputTextLoginState> _passwordkey = GlobalKey();
 
-  void _goTo(FirebaseUser user) {
+  void _goTo(BuildContext context, FirebaseUser user) {
     if (user != null) {
       Navigator.pushReplacementNamed(context, HomePage.routeName);
     } else {
-      print("Login failed");
+      print('login failed');
     }
   }
 
@@ -47,7 +47,7 @@ class _LoginFormState extends State<LoginForm> {
       final FirebaseUser user = await Auth.instance
           .loginByPassword(context, email: email, password: password);
 
-      _goTo(user);
+      _goTo(context, user);
     }
   }
 
@@ -90,7 +90,9 @@ class _LoginFormState extends State<LoginForm> {
                   padding: EdgeInsets.symmetric(vertical: 15),
                   child: Text(
                     "Olvide mi contraseña",
-                    style: TextStyle(fontFamily: 'Oranienbaum'),
+                    style: TextStyle(
+                      fontFamily: 'Oranienbaum',
+                    ),
                   ),
                   onPressed: widget.onGoToForgotPassword,
                 ),
@@ -98,14 +100,14 @@ class _LoginFormState extends State<LoginForm> {
               SizedBox(
                 height: responsive.ip(2),
               ),
-              RoundedButton(
-                label: "Iniciar",
-                onPressed: this._submit,
-              ),
+              RoundedButton(onPressed: this._submit, label: "Iniciar"),
               SizedBox(
                 height: responsive.ip(3.3),
               ),
-              Text("Iniciar Sesion Con:"),
+              Text(
+                "Iniciar con:",
+                style: TextStyle(color: Colors.white),
+              ),
               SizedBox(
                 height: responsive.ip(1),
               ),
@@ -113,26 +115,26 @@ class _LoginFormState extends State<LoginForm> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   CircleButton(
-                    iconPath: 'assets/pages/login/facebook.svg',
-                    size: 50,
-                    backgroundColor: Color(0xff448AFF),
+                    size: 55,
+                    iconPath: "assets/pages/login/facebook.svg",
                     onPressed: () async {
                       final user = await Auth.instance.facebook(context);
-                      _goTo(user);
+                      _goTo(context, user);
                     },
+                    backgroundColor: Color(0xff448AFF),
                   ),
                   SizedBox(
-                    width: 20,
+                    width: 15,
                   ),
                   CircleButton(
-                    iconPath: 'assets/pages/login/google.svg',
-                    size: 50,
-                    backgroundColor: Color(0xffFF1744),
+                    size: 55,
+                    iconPath: "assets/pages/login/google.svg",
                     onPressed: () async {
                       final user = await Auth.instance.google(context);
-                      _goTo(user);
+                      _goTo(context, user);
                     },
-                  ),
+                    backgroundColor: Color(0xffFF1744),
+                  )
                 ],
               ),
               SizedBox(
@@ -141,17 +143,19 @@ class _LoginFormState extends State<LoginForm> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text("¿No tiene una cuenta?"),
+                  Text(
+                    "No tienes una cuenta?",
+                    style: TextStyle(color: Colors.white),
+                  ),
                   CupertinoButton(
                     child: Text(
                       "Registrarse",
                       style: TextStyle(
-                        fontFamily: 'Oranienbaum',
-                        fontWeight: FontWeight.w600,
-                      ),
+                          fontFamily: 'Oranienbaum',
+                          fontWeight: FontWeight.w600),
                     ),
                     onPressed: widget.onGoToRegister,
-                  ),
+                  )
                 ],
               ),
             ],

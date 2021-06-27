@@ -1,20 +1,20 @@
-import 'package:after_layout/after_layout.dart';
-import 'package:calculadora_imc/pages/login/widget/login_form.dart';
-import 'package:calculadora_imc/pages/login/widget/welcome.dart';
-import 'package:calculadora_imc/pages/login/widget/register_form.dart';
 import 'package:calculadora_imc/pages/login/widget/forgot_password.dart';
+import 'package:calculadora_imc/pages/login/widget/login_form.dart';
+import 'package:calculadora_imc/pages/login/widget/register_form.dart';
+import 'package:calculadora_imc/pages/login/widget/welcome.dart';
 import 'package:calculadora_imc/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:after_layout/after_layout.dart';
 
 class LoginFormType {
   static final int login = 0;
-  static final int regiter = 1;
+  static final int register = 1;
   static final int forgotPassword = 2;
 }
 
 class LoginPage extends StatefulWidget {
-  static final routeName = 'Login';
+  static final routeName = 'login';
   LoginPage({Key key}) : super(key: key);
 
   @override
@@ -31,12 +31,7 @@ class _LoginPageState extends State<LoginPage> with AfterLayoutMixin {
   }
 
   @override
-  void afterFirstLayout(BuildContext context) {
-    final bool isTablet = MediaQuery.of(context).size.shortestSide >= 600;
-    if (isTablet) {
-      SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    }
-  }
+  void afterFirstLayout(BuildContext context) {}
 
   @override
   void dispose() {
@@ -58,16 +53,16 @@ class _LoginPageState extends State<LoginPage> with AfterLayoutMixin {
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
         LoginForm(
-          alignment: isLandscape ? Alignment.center : Alignment.center,
+          alignment: isLandscape ? Alignment.center : Alignment.bottomCenter,
           onGoToRegister: () {
-            _switchForm(LoginFormType.regiter);
+            _switchForm(LoginFormType.register);
           },
           onGoToForgotPassword: () {
             _switchForm(LoginFormType.forgotPassword);
           },
         ),
         RegisterForm(
-          alignment: isLandscape ? Alignment.center : Alignment.center,
+          alignment: isLandscape ? Alignment.center : Alignment.bottomCenter,
           onGoToLogin: () {
             _switchForm(LoginFormType.login);
           },
@@ -85,62 +80,58 @@ class _LoginPageState extends State<LoginPage> with AfterLayoutMixin {
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
 
-    /* return OrientationBuilder(builder: (_, Orientation orientation) {
-      return Center(child: Text("$orientation"));
-    }); */
-
     return Scaffold(
       body: GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
         },
         child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          child: OrientationBuilder(builder: (_, Orientation orientation) {
-            if (orientation == Orientation.portrait) {
-              return SingleChildScrollView(
-                child: Container(
-                  height: responsive.height,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Welcome(),
-                      Expanded(
-                        child: _getForms(false),
-                      ),
-                    ],
+            width: double.infinity,
+            height: double.infinity,
+            color: Colors.black,
+            child: OrientationBuilder(builder: (_, Orientation orientation) {
+              if (orientation == Orientation.portrait) {
+                return SingleChildScrollView(
+                  child: Container(
+                    height: responsive.height,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Welcome(),
+                        Expanded(
+                          child: _getForms(false),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              );
-            } else {
-              return Row(
-                children: <Widget>[
-                  Expanded(
-                    child: SingleChildScrollView(
-                      physics: NeverScrollableScrollPhysics(),
-                      child: Container(
-                        padding: EdgeInsets.only(left: 10),
-                        height: responsive.height,
-                        child: Center(
-                          child: Welcome(),
+                );
+              } else {
+                return Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: SingleChildScrollView(
+                        physics: NeverScrollableScrollPhysics(),
+                        child: Container(
+                          padding: EdgeInsets.only(left: 20),
+                          height: responsive.height,
+                          child: Center(
+                            child: Welcome(),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Container(
-                        height: responsive.height,
-                        child: _getForms(true),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Container(
+                          height: responsive.height,
+                          child: _getForms(true),
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              );
-            }
-          }),
-        ),
+                  ],
+                );
+              }
+            })),
       ),
     );
   }

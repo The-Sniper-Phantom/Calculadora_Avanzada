@@ -26,7 +26,7 @@ class CircleButton extends StatelessWidget {
       child: Container(
         width: this.size,
         height: this.size,
-        padding: EdgeInsets.all(12),
+        padding: EdgeInsets.all(15),
         child: SvgPicture.asset(iconPath, color: Colors.white),
         decoration: BoxDecoration(
           color: this.backgroundColor ?? AppColors.primary,

@@ -75,20 +75,20 @@ class InputTextLoginState extends State<InputTextLogin> {
       suffix: widget.validator != null
           ? Icon(
               Icons.check_circle,
-              color: _validationOk ? AppColors.primary : Colors.black26,
+              color: _validationOk ? AppColors.primary : Colors.white12,
             )
           : null,
       placeholder: this.widget.placeholder,
-      style: TextStyle(fontFamily: 'Oranienbaum'),
+      style: TextStyle(fontFamily: 'Oranienbaum', color: Colors.white),
       placeholderStyle: TextStyle(
         fontFamily: 'Oranienbaum',
-        color: Color(0xffcccccc),
+        color: Colors.white,
       ),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
             width: 1,
-            color: Colors.black,
+            color: Colors.white30,
           ),
         ),
       ),

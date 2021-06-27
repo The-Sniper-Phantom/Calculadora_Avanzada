@@ -13,6 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class RegisterForm extends StatefulWidget {
   final Alignment alignment;
   final VoidCallback onGoToLogin;
+
   const RegisterForm(
       {Key key,
       @required this.onGoToLogin,
@@ -34,7 +35,7 @@ class _RegisterFormState extends State<RegisterForm> {
     if (user != null) {
       Navigator.pushReplacementNamed(context, HomePage.routeName);
     } else {
-      print("Error Al Registrar Usuario");
+      print("Error Al Registrarse");
     }
   }
 
@@ -51,8 +52,12 @@ class _RegisterFormState extends State<RegisterForm> {
 
     if (usernameOk && emailOk && passwordOk && vpasswordOk) {
       if (_agree) {
-        final FirebaseUser user = await Auth.instance.signUp(context,
-            username: username, email: email, password: password);
+        final FirebaseUser user = await Auth.instance.signUp(
+          context,
+          username: username,
+          email: email,
+          password: password,
+        );
 
         _goTo(user);
       } else {
@@ -60,7 +65,8 @@ class _RegisterFormState extends State<RegisterForm> {
             description: "Terminos y Condiciones No Aceptados");
       }
     } else {
-      Dialogs.alert(context, description: "Datos Ingresados Incorrectos");
+      Dialogs.alert(context,
+          description: "Las Credenciales Ingresadas Son Incorrectos");
     }
 
     print(username);
@@ -77,18 +83,18 @@ class _RegisterFormState extends State<RegisterForm> {
           padding: EdgeInsets.symmetric(horizontal: 15),
           constraints: BoxConstraints(maxWidth: 400),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
                 "Nueva Cuenta",
                 style: TextStyle(
-                  color: AppColors.primary,
                   fontSize: 25,
-                  fontFamily: 'Wallpoet',
+                  fontFamily: 'Benne',
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              SizedBox(height: responsive.ip(2)),
               InputTextLogin(
                 key: _usernamekey,
                 iconPath: 'assets/pages/login/profile.svg',
@@ -97,6 +103,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   return text.trim().length > 0;
                 },
               ),
+              SizedBox(height: responsive.ip(2)),
               InputTextLogin(
                 key: _emailkey,
                 iconPath: 'assets/pages/login/email.svg',
@@ -104,16 +111,18 @@ class _RegisterFormState extends State<RegisterForm> {
                 keyboardType: TextInputType.emailAddress,
                 validator: (text) => Extras.isValidEmail(text),
               ),
+              SizedBox(height: responsive.ip(2)),
               InputTextLogin(
                 key: _passwordkey,
                 iconPath: 'assets/pages/login/password.svg',
                 placeholder: "Contraseña",
                 obscureText: true,
                 validator: (text) {
-                  _vpasswordkey.currentState.checkValidation();
+                  _vpasswordkey.currentState?.checkValidation();
                   return text.trim().length >= 6;
                 },
               ),
+              SizedBox(height: responsive.ip(2)),
               InputTextLogin(
                 key: _vpasswordkey,
                 iconPath: 'assets/pages/login/password.svg',
@@ -125,35 +134,43 @@ class _RegisterFormState extends State<RegisterForm> {
                           _passwordkey.currentState.value;
                 },
               ),
+              SizedBox(height: responsive.ip(2)),
               DefaultTextStyle(
                 style: TextStyle(
-                    fontSize: responsive.ip(1),
-                    color: Theme.of(context).textTheme.subtitle1.color),
+                    fontSize: responsive.ip(1.3),
+                    color: Theme.of(context).textTheme.subtitle.color),
                 child: Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
                   children: <Widget>[
                     Checkbox(
                         value: _agree,
+                        checkColor: Colors.white,
                         onChanged: (isChecked) {
                           setState(() {
                             _agree = isChecked;
                           });
                         }),
-                    Text("Acepto las "),
+                    Text(
+                      "Acepto Las ",
+                      style: TextStyle(color: Colors.white),
+                    ),
                     InkWell(
                       onTap: () {},
                       child: Text(
-                        "Condiciones del Servicios",
+                        "Condiciones Del Servicio",
                         style: TextStyle(
                             color: AppColors.primary,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Text("y la"),
+                    Text(
+                      " & ",
+                      style: TextStyle(color: Colors.white),
+                    ),
                     InkWell(
                       onTap: () {},
                       child: Text(
-                        "Politica de Privacidad",
+                        "Politica De Privacidad",
                         style: TextStyle(
                             color: AppColors.primary,
                             fontWeight: FontWeight.bold),
@@ -162,12 +179,16 @@ class _RegisterFormState extends State<RegisterForm> {
                   ],
                 ),
               ),
+              SizedBox(height: responsive.ip(2)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   FlatButton(
                     onPressed: widget.onGoToLogin,
-                    child: Text("<- Volver"),
+                    child: Text(
+                      "<- Volver",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                   SizedBox(width: 10),
                   RoundedButton(

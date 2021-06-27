@@ -17,8 +17,11 @@ class Auth {
     return (await _firebaseAuth.currentUser());
   }
 
-  Future<FirebaseUser> loginByPassword(BuildContext context,
-      {@required String email, @required String password}) async {
+  Future<FirebaseUser> loginByPassword(
+    BuildContext context, {
+    @required String email,
+    @required String password,
+  }) async {
     ProgressDialog progressDialog = ProgressDialog(context);
     try {
       progressDialog.show();
@@ -51,10 +54,6 @@ class Auth {
 
       final LoginResult result = await FacebookAuth.instance.login();
       if (result.status == 200) {
-        print("Facebook login ok");
-        /* final userData = await FacebookAuth.instance.getUserData();
-        print(userData);
- */
         final AuthCredential credential = FacebookAuthProvider.getCredential(
             accessToken: result.accessToken.token);
 
@@ -62,7 +61,7 @@ class Auth {
             await _firebaseAuth.signInWithCredential(credential);
 
         final FirebaseUser user = authResult.user;
-        print("facebook username: ${user.displayName}");
+
         progressDialog.dismiss();
 
         return user;
@@ -108,7 +107,7 @@ class Auth {
 
   Future<void> logOut(BuildContext context) async {
     final String providerId = (await user).providerData[0].providerId;
-    print("providerID $providerId");
+
     switch (providerId) {
       case "facebook.com":
         await FacebookAuth.instance.logOut();
@@ -148,7 +147,6 @@ class Auth {
       }
 
       progressDialog.dismiss();
-
       return null;
     } on PlatformException catch (e) {
       String message = "Error Desconocido";

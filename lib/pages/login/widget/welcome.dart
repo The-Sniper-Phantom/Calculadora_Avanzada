@@ -42,15 +42,16 @@ class Welcome extends StatelessWidget {
                       Text(
                         "¡Bienvenido/Welcome!",
                         style: TextStyle(
-                          fontSize: responsive.ip(2.5),
+                          fontSize: responsive.ip(3),
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Benne',
+                          color: Colors.white,
                         ),
                       ),
                     ],
                   ),
                 ),
-                Positioned(
+                /* Positioned(
                   top: 0,
                   left: 0,
                   right: 0,
@@ -59,7 +60,7 @@ class Welcome extends StatelessWidget {
                     width: contraints.maxWidth,
                     height: contraints.maxHeight * 0.8,
                   ),
-                ),
+                ), */
                 Positioned(
                   top: contraints.maxHeight * 0.145,
                   left: 5,
