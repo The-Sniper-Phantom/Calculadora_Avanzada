@@ -381,6 +381,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
 import 'package:calculadora_imc/utils/app_colors.dart';
 import 'package:calculadora_imc/utils/calResult.dart';
+import 'package:calculadora_imc/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
@@ -411,6 +412,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Responsive responsive = Responsive.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Calculadora IMC', style: appBar),
@@ -475,7 +477,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     Column(
                       children: [
                         Text('Ingrese su peso(KG)', style: textStyle),
-                        SizedBox(height: 10),
+                        SizedBox(height: responsive.ip(1)),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 16),
                           width: MediaQuery.of(context).size.width / 2,
@@ -505,7 +507,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     Column(
                       children: [
                         Text('Ingrese su altura(CM)', style: textStyle),
-                        SizedBox(height: 10),
+                        SizedBox(height: responsive.ip(1)),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 16),
                           width: MediaQuery.of(context).size.width / 2,
@@ -585,7 +587,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Masa Corporal Magra', style: textStyle2),
+                          Text(
+                            'Masa Corporal Magra',
+                            style: textStyle2,
+                            textAlign: TextAlign.center,
+                          ),
                           SizedBox(
                             height: 10,
                           ),
@@ -602,37 +608,13 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: ListTile(
-                  leading: bodyMassIndex > 0 && bodyMassIndex <= 18
-                      ? Padding(
-                          padding: const EdgeInsets.only(top: 12.0),
-                          child:
-                              Image.asset("assets/screen/imc/desnutricion.png"),
-                        )
-                      : bodyMassIndex > 18 && bodyMassIndex <= 25
-                          ? Padding(
-                              padding: const EdgeInsets.only(top: 12.0),
-                              child:
-                                  Image.asset("assets/screen/imc/normal.png"),
-                            )
-                          : bodyMassIndex > 25 && bodyMassIndex <= 30
-                              ? Padding(
-                                  padding: const EdgeInsets.only(top: 12.0),
-                                  child: Image.asset(
-                                      "assets/screen/imc/gordo.png"),
-                                )
-                              : bodyMassIndex > 30
-                                  ? Padding(
-                                      padding: const EdgeInsets.only(top: 12.0),
-                                      child: Image.asset(
-                                          "assets/screen/imc/obesidad.png"),
-                                    )
-                                  : null,
                   title: bodyMassIndex > 0 && bodyMassIndex <= 18
                       ? Padding(
                           padding: const EdgeInsets.symmetric(vertical: 2.0),
                           child: Text(
                             'Desnutricion',
                             style: titleListTitle,
+                            textAlign: TextAlign.center,
                           ),
                         )
                       : bodyMassIndex > 18 && bodyMassIndex <= 25
@@ -642,24 +624,27 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                               child: Text(
                                 'Normal',
                                 style: titleListTitle,
+                                textAlign: TextAlign.center,
                               ),
                             )
                           : bodyMassIndex > 25 && bodyMassIndex <= 30
                               ? Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 2.0),
+                                      const EdgeInsets.symmetric(vertical: 4.0),
                                   child: Text(
                                     'Sobrepeso',
                                     style: titleListTitle,
+                                    textAlign: TextAlign.center,
                                   ),
                                 )
                               : bodyMassIndex > 30
                                   ? Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          vertical: 2.0),
+                                          vertical: 8),
                                       child: Text(
                                         'Obesidad',
                                         style: titleListTitle,
+                                        textAlign: TextAlign.center,
                                       ),
                                     )
                                   : null,
@@ -667,21 +652,24 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       ? Text(
                           'Su IMC es $bodyMassIndex, se presenta cuando no se obtienen calorías suficientes o la cantidad adecuada de nutrientes principales, como las vitaminas y los minerales, que se necesitan para una buena salud.',
                           style: subtitleListTitle,
+                          textAlign: TextAlign.center,
                         )
                       : bodyMassIndex > 18 && bodyMassIndex <= 25
                           ? Text(
                               'Su IMC es $bodyMassIndex, se considera un peso saludable  aquel que nos permite mantenernos en un buen estado de salud y calidad de vida.  También se entiende como  los valores de peso, dentro de los cuales, no existe riesgo para la salud de la persona.',
-                              style: titleListTitle,
+                              style: subtitleListTitle,
+                              textAlign: TextAlign.center,
                             )
                           : bodyMassIndex > 25 && bodyMassIndex <= 30
                               ? Text(
-                                  'Su IMC es $bodyMassIndex, las personas están subiendo de peso debido a las elecciones de alimentos no saludables (como comidas rápidas) y a los hábitos familiares (como comer frente al televisor en lugar de hacerlo alrededor de una mesa). Las bebidas y los bocadillos con muchas calorías y pocos nutrientes, las raciones más grandes y el estilo de vida sedentario contribuyen a la epidemia de obesidad.',
-                                  style: subtitleListTitle,
+                                  'Su IMC es $bodyMassIndex, las personas están subiendo de peso debido a las elecciones de alimentos no saludables (como comidas rápidas) y a los hábitos familiares (como comer frente al televisor en lugar de hacerlo alrededor de una mesa).',
+                                  textAlign: TextAlign.center,
                                 )
                               : bodyMassIndex > 30
                                   ? Text(
-                                      'Su IMC es $bodyMassIndex, la obesidad puede causar diversas complicaciones a la salud, como problemas al corazón y a la circulación, colesterol y presión arterial alta, problemas respiratorios, artritis, problemas al hígado, problemas con la fertilidad y, en casos extremos, diabetes y cáncer. Además, puede afectar emocionalmente a las personas.',
+                                      'Su IMC es $bodyMassIndex, la obesidad puede causar diversas complicaciones a la salud, como problemas al corazón y a la circulación, colesterol y presión arterial alta, problemas respiratorios, artritis, problemas al hígado, problemas con la fertilidad y, en casos extremos, diabetes y cáncer.',
                                       style: subtitleListTitle,
+                                      textAlign: TextAlign.center,
                                     )
                                   : null,
                 ),
@@ -690,10 +678,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   child: Align(
                 alignment: FractionalOffset.bottomCenter,
                 child: Padding(
-                  padding: EdgeInsets.all(48.0),
+                  padding: EdgeInsets.all(40.0),
                   child: SizedBox(
                     height: 40,
-                    width: 250,
+                    width: 100,
                     child: RaisedButton(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18),

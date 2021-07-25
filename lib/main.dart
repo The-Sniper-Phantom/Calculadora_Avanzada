@@ -27,13 +27,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Calculadora IMC',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
+      /*  theme: ThemeData(
           //brightness: Brightness.dark,
-          ),
+          ), */
       home: SplashScreen(),
       routes: {
         HomePage.routeName: (_) => HomePage(),
         SplashPage.routeName: (_) => SplashPage(),
+        MainPage.routeName: (_) => MainPage(),
         LoginPage.routeName: (_) => LoginPage(),
       },
     );
@@ -49,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 4), () {
+    Timer(Duration(seconds: 2), () {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
     });
@@ -80,6 +81,7 @@ class _SplashScreenState extends State<SplashScreen> {
 }
 
 class MainPage extends StatefulWidget {
+  static final routeName = 'onboarding';
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -108,7 +110,7 @@ class _MainPageState extends State<MainPage> {
                     width: responsive.wp(80),
                     height: responsive.hp(95),
                     color: Colors.white),
-                title: "QUE ES IMC?",
+                title: "QUE ES IMC",
                 subtitle:
                     "Una medida de la obesidad se determina mediante el índice de masa corporal (IMC).que se calcula dividiendo los kilogramos de peso por el cuadrado de la estatura en metros (IMC = peso [kg]/ estatura [m2]).",
                 onNext: nextPage),
@@ -135,16 +137,31 @@ class _MainPageState extends State<MainPage> {
                     "La cantidad de nutriente que se recomienda diariamente para un grupo de personas dependiendo de su edad y sexo. Las recomendaciones se calculan en base a los requerimientos nutricionales de los individuos.",
                 onNext: nextPage),
             Container(
-              child: Center(
-                child: RaisedButton(
-                  child: Text('Open route'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SplashPage()),
-                    );
-                  },
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.blue,
+                        onPrimary: Colors.black,
+                        elevation: 10.0,
+                        shadowColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18)),
+                        textStyle: TextStyle(
+                            color: Colors.pink,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Oranienbaum')),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SplashPage()));
+                    },
+                    child: Text('COMENZAR'),
+                  ),
+                ],
               ),
             ),
           ],

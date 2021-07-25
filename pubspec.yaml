@@ -11,6 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
 
 dev_dependencies:
   flutter_test:
@@ -22,9 +23,11 @@ dev_dependencies:
   firebase_auth: ^0.16.0
   google_sign_in: ^4.4.1
   flutter_facebook_auth: ^0.2.1
-  curved_navigation_bar: ^0.3.7
+  bottom_navy_bar: ^6.0.0
   font_awesome_flutter: ^9.1.0
   group_button: ^2.2.2
+  fl_chart: ^0.36.2
+  video_player: ^2.1.10
 
 
 flutter:
@@ -34,6 +37,7 @@ flutter:
     - assets/pages/login/
     - assets/pages/loading/
     - assets/pages/onboarding/
+    - assets/gym/
 
   fonts:
     - family: Oranienbaum

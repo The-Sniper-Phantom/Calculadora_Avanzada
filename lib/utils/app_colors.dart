@@ -23,9 +23,10 @@ const titleListTitle = TextStyle(
     fontWeight: FontWeight.w600);
 
 const subtitleListTitle = TextStyle(
-    color: Color.fromARGB(250, 0, 0, 0),
-    fontFamily: 'Oranienbaum',
-    fontSize: 14);
+  color: Color.fromARGB(250, 0, 0, 0),
+  fontFamily: 'Oranienbaum',
+  fontSize: 14,
+);
 
 const selectedButton = TextStyle(
     color: Color.fromARGB(250, 250, 250, 250), fontFamily: 'Oranienbaum');
