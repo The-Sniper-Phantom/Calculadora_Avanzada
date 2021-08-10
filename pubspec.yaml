@@ -38,6 +38,7 @@ flutter:
     - assets/pages/loading/
     - assets/pages/onboarding/
     - assets/gym/
+    - assets/nutri/
 
   fonts:
     - family: Oranienbaum

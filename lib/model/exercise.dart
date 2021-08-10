@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class Exercise {
@@ -6,6 +6,7 @@ class Exercise {
   final Duration duration;
   final int noOfReps;
   final String videoUrl;
+
   VideoPlayerController controller;
 
   Exercise({

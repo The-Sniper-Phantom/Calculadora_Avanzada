@@ -66,8 +66,8 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/pages/loading/logo.jpg',
-              width: responsive.wp(50),
+              'assets/pages/loading/logo.png',
+              width: responsive.wp(150),
             ),
             SizedBox(height: 50),
             CircularProgressIndicator(

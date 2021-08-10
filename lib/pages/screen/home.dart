@@ -1,3 +1,4 @@
+import 'package:calculadora_imc/utils/app_colors.dart';
 import 'package:calculadora_imc/widget/line_chart_widget.dart';
 import 'package:calculadora_imc/widget/exercises_widget.dart';
 import 'package:flutter/material.dart';
@@ -22,10 +23,36 @@ class RutinasScreen extends StatelessWidget {
         title: Text('Estadisticas'),
         centerTitle: true,
         pinned: true,
-        leading: Icon(Icons.menu),
-        actions: [
-          Icon(Icons.person, size: 28),
-          SizedBox(width: 12),
-        ],
+        leading: GestureDetector(
+          child: Icon(Icons.info_outline),
+          onTap: () {
+            return showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text(
+                      "Informacion.",
+                      style: textStyle,
+                      textAlign: TextAlign.center,
+                    ),
+                    content: Text(
+                      "Podras encontrar ejercicios dependiendo tu nivel actual puede ser: Principiante, Intermedio y Avanzado, dependiendo tu nivel elige una seccion y luego selecciona la parte del cuerpo que desees entrenar.",
+                      style: textStyle,
+                      textAlign: TextAlign.center,
+                    ),
+                    actions: <Widget>[
+                      FlatButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            'OK',
+                            style: textStyle,
+                          ))
+                    ],
+                  );
+                });
+          },
+        ),
       );
 }
